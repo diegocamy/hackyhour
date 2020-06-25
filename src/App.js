@@ -1,25 +1,137 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Navbar from './components/navbar/Navbar';
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Karla',sans-serif;
+  }
+
+  body {
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => (theme.name === 'default' ? 'black' : 'white')};
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Rubik', sans-serif;
+  }
+
+  
+`;
+
+const theme = {
+  default: {
+    name: 'default',
+    background: '#DEE5E5',
+    backgroundDark: '#9DC5BB',
+    primary: '#17B890',
+    secondary: '#5E807F',
+    dark: '#082D0F',
+  },
+  dark: {
+    name: 'dark',
+    background: '#1C2541',
+    backgroundDark: '#0B132B',
+    primary: '#6FFFE9',
+    secondary: '#5BC0BE',
+    dark: '#0E141B',
+  },
+};
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={isDark ? theme.dark : theme.default}>
+        <GlobalStyle />
+        <Navbar setIsDark={setIsDark} isDark={isDark} />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <>
+                <h1>Hello World</h1>
+                <p>
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremloremlore
+                  mloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+                <h2>Mas texto!</h2>
+                <p>
+                  loremloremloremloremloreml
+                  oremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlor
+                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremloremloremlo
+                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                  loremloremlorem
+                </p>
+              </>
+            )}
+          />
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
 }
 
