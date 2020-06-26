@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Rubik', sans-serif;
   }
 
+  .mainDiv {
+    margin-top: 55px;
+  }
+
   
 `;
 
@@ -49,87 +53,89 @@ function App() {
       <ThemeProvider theme={isDark ? theme.dark : theme.default}>
         <GlobalStyle />
         <Navbar setIsDark={setIsDark} isDark={isDark} />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            component={() => (
-              <>
-                <h1>Hello World</h1>
-                <p>
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremloremlore
-                  mloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
+        <div className="mainDiv">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <>
+                  <h1>Hello World</h1>
+                  <p>
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremloremlore
+                    mloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
 
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-                <h2>Mas texto!</h2>
-                <p>
-                  loremloremloremloremloreml
-                  oremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlor
-                  emloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremloremloremlo
-                  remloremloremloremloremloremloremloremloremloremloremloremloremlorem
-                  loremloremlorem
-                </p>
-              </>
-            )}
-          />
-        </Switch>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                  <h2>Mas texto!</h2>
+                  <p>
+                    loremloremloremloremloreml
+                    oremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlor
+                    emloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremloremloremlo
+                    remloremloremloremloremloremloremloremloremloremloremloremloremlorem
+                    loremloremlorem
+                  </p>
+                </>
+              )}
+            />
+          </Switch>
+        </div>
       </ThemeProvider>
     </Router>
   );
