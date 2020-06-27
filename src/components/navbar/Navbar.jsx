@@ -1,150 +1,103 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const Nav = styled.nav`
-  position: fixed;
-  top: 0;
-  padding: 10px;
-  width: 100vw;
-  overflow: hidden;
-  background: ${({ theme }) =>
-    theme.name === 'default' ? theme.primary : theme.backgroundDark};
-  color: ${({ theme }) => (theme.name === 'default' ? 'white' : theme.primary)};
+import logo from '../../assets/logo.png';
+import background from '../../assets/background.png';
+import NavItem from '../nav-item/NavItem';
 
-  .container {
-    margin: 0 auto;
-    width: 95vw;
-    max-width: 1024px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 0.9;
+const HeaderBackground = styled.div`
+  background: url(${background});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 210px;
+  width: 100%;
+`;
 
-    .logo {
-      font-size: 1.3rem;
-    }
+const HeaderLogo = styled.div`
+  position: absolute;
+  top: 20px;
+  background: url(${logo});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 200px;
+  width: 100%;
+  z-index: 1;
+`;
 
-    .derecha {
-      font-size: 1.5rem;
-      display: flex;
-      flex-direction: row-reverse;
+const NavbarMenu = styled.div`
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-bottom: 5px solid ${({ theme }) => theme.yellow};
+  text-align: center;
 
-      .navLinks {
-        display: none;
+  -webkit-box-shadow: 0px -3px 6px 0px rgba(120, 120, 120, 1);
+  -moz-box-shadow: 0px -3px 6px 0px rgba(120, 120, 120, 1);
+  box-shadow: 0px -3px 6px 0px rgba(120, 120, 120, 1);
 
-        a {
-          text-decoration: none;
-          font-size: 1 rem;
-          color: ${({ theme }) =>
-            theme.name === 'default' ? 'white' : theme.primary};
-          margin: 0 5px;
-
-          &:hover {
-            color: ${({ theme }) => theme.secondary};
-          }
-        }
-      }
-
-      i {
-        margin: 0 10px;
-
-        &:hover {
-          cursor: pointer;
-          color: ${({ theme }) => theme.secondary};
-        }
-      }
-    }
-  }
-
-  .links {
-    position: relative;
-    width: 100%;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    display: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 35vh;
-
-    a {
-      text-decoration: none;
-      font-size: 1 rem;
-      color: ${({ theme }) =>
-        theme.name === 'default' ? 'white' : theme.primary};
-      margin: 0 5px;
-      font-size: 1.3rem;
-
-      &:hover {
-        color: ${({ theme }) => theme.secondary};
-      }
-    }
-
-    &.active {
-      display: flex;
-    }
+  .separador {
+    visibility: hidden;
+    color: ${props => props.theme.yellow};
   }
 
   @media only screen and (min-width: 769px) {
-    .container {
-      .logo {
-        font-size: 1.6rem;
-      }
+    position: sticky;
+    top: 0;
 
-      .derecha {
-        .navLinks {
-          display: block;
-        }
-      }
-    }
-
-    .dropdown {
-      display: none;
-    }
-
-    .links {
-      display: none;
-
-      &.active {
-        display: none;
-      }
+    .separador {
+      visibility: visible;
     }
   }
 `;
 
-const Navbar = ({ setIsDark, isDark }) => {
-  const [showDropDown, setShowDropDown] = useState(false);
+const Navbar = () => {
   return (
-    <Nav>
-      <div className="container">
-        <div className="logo">Hacky Hour!</div>
-        <div className="derecha">
-          <div className="navLinks">
-            <a href="#">Categorias</a>
-            <a href="#">Acerca De</a>
-            <a href="#">Login</a>
-          </div>
-          <div className="dropdown">
-            <i
-              className={
-                !showDropDown ? 'fas fa-chevron-down' : 'fas fa-chevron-up'
-              }
-              onClick={() => setShowDropDown(!showDropDown)}></i>
-          </div>
-          <div className="theme" onClick={() => setIsDark(!isDark)}>
-            <i className={isDark ? 'fas fa-lightbulb' : 'far fa-lightbulb'}></i>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`links ${showDropDown && 'active'}`}
-        onClick={() => setShowDropDown(!showDropDown)}>
-        <a href="#">Categorias</a>
-        <a href="#">Acerca de</a>
-        <a href="#">Login</a>
-      </div>
-    </Nav>
+    <div>
+      <HeaderBackground />
+      <HeaderLogo />
+      <NavbarMenu>
+        <NavItem
+          middleText="Noticias"
+          topText="últimas"
+          bottomText="x"
+          hiddenBottom
+        />
+        <p className="separador">x</p>
+        <NavItem middleText="Campus" topText="IFSUL" bottomText="UTEC" />
+        <p className="separador">x</p>
+        <NavItem
+          topText="todo sobre"
+          middleText="Programacion"
+          bottomText="y más"
+        />
+        <p className="separador">x</p>
+        <NavItem
+          middleText="Anuncios"
+          topText="HACKY HOUR"
+          bottomText="x"
+          hiddenBottom
+        />
+        <p className="separador">x</p>
+        <NavItem
+          topText="más sobre"
+          middleText="Nosotros"
+          bottomText="x"
+          hiddenBottom
+        />
+        <p className="separador">x</p>
+        <NavItem
+          middleText="Ingresar"
+          topText="participá"
+          bottomText="x"
+          hiddenBottom
+        />
+      </NavbarMenu>
+    </div>
   );
 };
 
