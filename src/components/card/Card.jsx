@@ -8,6 +8,8 @@ const CardContainer = styled.div`
   width: 300px;
   background: white;
   margin-bottom: 15px;
+
+  box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
 `;
 
 const CardTop = styled.div`

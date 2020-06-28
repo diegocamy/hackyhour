@@ -28,8 +28,8 @@ const Item = styled.div`
     font-size: 1.8rem;
   }
 
-  @media only screen and (max-width: 768px) {
-    width: 45%;
+  @media only screen and (max-width: 865px) {
+    width: 30%;
 
     .top {
       visibility: hidden;
@@ -42,6 +42,11 @@ const Item = styled.div`
     .middle {
       font-size: 1.3rem;
     }
+  }
+
+  @media only screen and (max-width: 425px) {
+    width: 50%;
+    margin: auto;
   }
 
   @media only screen and (max-width: 1202px) {

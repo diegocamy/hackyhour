@@ -45,10 +45,7 @@ const NavbarMenu = styled.div`
     color: ${props => props.theme.yellow};
   }
 
-  @media only screen and (min-width: 769px) {
-    position: sticky;
-    top: 0;
-
+  @media only screen and (min-width: 865px) {
     .separador {
       visibility: visible;
     }

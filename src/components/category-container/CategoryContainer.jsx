@@ -18,6 +18,13 @@ const Category = styled.div`
       flex-wrap: wrap;
     }
   }
+
+  @media only screen and (min-width: 860px) and (max-width: 1260px) {
+    .cards {
+      width: 70%;
+      margin: auto;
+    }
+  }
 `;
 
 const CategoryTitle = styled.div`
@@ -43,54 +50,14 @@ const CategoryTitle = styled.div`
   }
 `;
 
-const CategoryContainer = () => {
+const CategoryContainer = ({ name, posts, ...props }) => {
   return (
     <Category>
       <CategoryTitle>
-        <h2>Populares:</h2>
+        <h2>{name}</h2>
         <div className="background-line" />
       </CategoryTitle>
       <div className="cards">
-        <Card
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
         <Card
           image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
           titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"

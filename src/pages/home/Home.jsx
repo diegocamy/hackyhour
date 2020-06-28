@@ -4,7 +4,9 @@ import CategoryContainer from '../../components/category-container/CategoryConta
 const Home = () => {
   return (
     <div className="container">
-      <CategoryContainer />
+      <CategoryContainer name="Populares" />
+      <CategoryContainer name="Recientes" />
+      <CategoryContainer name="Programacion" />
     </div>
   );
 };
