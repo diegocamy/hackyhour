@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${props => props.theme.lightGray}
   }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
   
 `;
 

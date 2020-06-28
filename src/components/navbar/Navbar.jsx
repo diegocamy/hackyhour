@@ -57,7 +57,7 @@ const NavbarMenu = styled.div`
 
 const Navbar = () => {
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <HeaderBackground />
       <HeaderLogo />
       <NavbarMenu>
