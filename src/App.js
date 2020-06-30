@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
-import Search from './pages/search/Search';
+import SearchPage from './pages/search/SearchPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -44,7 +44,8 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/search" component={Search} />
+          <Route path="/search" component={SearchPage} />
+          <Route path="/post/:id" component={() => <h1>post</h1>} />
         </Switch>
       </ThemeProvider>
     </Router>

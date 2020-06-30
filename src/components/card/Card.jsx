@@ -5,7 +5,7 @@ const CardContainer = styled.div`
   border-radius: 5px;
   margin: 0 auto;
   height: 375px;
-  width: 300px;
+  width: ${props => props.widthInPx}px;
   background: white;
   margin-bottom: 15px;
 
@@ -100,9 +100,9 @@ const CardBody = styled.div`
   }
 `;
 
-const Card = ({ image, title, summary, category, ...props }) => {
+const Card = ({ image, title, summary, category, widthInPx, ...props }) => {
   return (
-    <CardContainer>
+    <CardContainer widthInPx={widthInPx}>
       <CardTop image={image}>
         <div className="background-image" />
       </CardTop>

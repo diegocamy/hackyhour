@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import logo from '../../assets/logo.png';
 import background from '../../assets/background.png';
 import NavItem from '../nav-item/NavItem';
+import { Link } from 'react-router-dom';
 
 const HeaderBackground = styled.div`
   background: url(${background});
@@ -56,7 +57,9 @@ const Navbar = () => {
   return (
     <div style={{ position: 'relative' }}>
       <HeaderBackground />
-      <HeaderLogo />
+      <Link to="/">
+        <HeaderLogo />
+      </Link>
       <NavbarMenu>
         <NavItem
           middleText="Noticias"
