@@ -100,17 +100,17 @@ const CardBody = styled.div`
   }
 `;
 
-const Card = ({ image, titulo, resumen, ...props }) => {
+const Card = ({ image, title, summary, category, ...props }) => {
   return (
     <CardContainer>
       <CardTop image={image}>
         <div className="background-image" />
       </CardTop>
       <CardBody>
-        <p className="badge">Programacion</p>
+        <p className="badge">{category}</p>
         <div className="content">
-          <h4>{titulo.slice(0, 52)}</h4>
-          <p>{resumen.slice(0, 47) + '...'}</p>
+          <h4>{title.slice(0, 52)}</h4>
+          <p>{summary.slice(0, 47) + '...'}</p>
           <hr className="separador" />
         </div>
         <div className="author-info">

@@ -60,23 +60,27 @@ const CategoryContainer = ({ name, posts, ...props }) => {
       <div className="cards">
         <Card
           image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
+          category="Programacion"
+          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
+          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
         />
         <Card
           image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
+          category="Noticias"
+          title="Tu Primer Hola Mundo En JAVA"
+          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
         />
         <Card
           image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
+          category="Campus"
+          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
+          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
         />
         <Card
           image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          titulo="Tu Primer Hola Mundo En JAVA"
-          resumen="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
+          category="Anuncios"
+          title="Tu Primer Hola Mundo En JAVA"
+          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
         />
       </div>
     </Category>
