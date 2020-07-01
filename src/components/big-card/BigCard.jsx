@@ -8,6 +8,7 @@ const BigCardContainer = styled.div`
   width: 100%;
   border-radius: 5px;
   margin-bottom: 10px;
+  box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
 
   @media only screen and (max-width: 375px) {
     width: 95%;
@@ -26,16 +27,31 @@ const PostImage = styled.div`
 
 const PostTitle = styled.div`
   padding: 15px;
+  display: flex;
+  align-items: center;
 
-  h2 {
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 1;
+  .text {
+    flex: 1;
+    h2 {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    p {
+      font-size: 0.7rem;
+      line-height: 1;
+    }
   }
+  .likes {
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+    color: red;
 
-  p {
-    font-size: 0.7rem;
-    line-height: 1;
+    i {
+      margin: 0 10px;
+    }
   }
 `;
 
@@ -89,8 +105,14 @@ const BigCard = ({ postImg, authorPhoto, authorName, postCategory }) => {
   return (
     <BigCardContainer>
       <PostTitle>
-        <h2>Title of the post</h2>
-        <p>Description of the post</p>
+        <div className="text">
+          <h2>Title of the post</h2>
+          <p>Description of the post</p>
+        </div>
+        <div className="likes">
+          <i className="fas fa-heart"></i>
+          <p>35</p>
+        </div>
       </PostTitle>
       <PostImage postImg={postImg} />
       <AuthorInfo>

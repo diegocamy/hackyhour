@@ -4,6 +4,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import SearchPage from './pages/search/SearchPage';
+import ProfilePage from './pages/profile/ProfilePage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -45,6 +46,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/profile/:id" component={ProfilePage} />
           <Route path="/post/:id" component={() => <h1>post</h1>} />
         </Switch>
       </ThemeProvider>
