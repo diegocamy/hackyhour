@@ -5,6 +5,7 @@ import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import SearchPage from './pages/search/SearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
+import CreatePostPage from './pages/create-post/CreatePostPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -46,8 +47,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/create" component={CreatePostPage} />
           <Route path="/profile/:id" component={ProfilePage} />
           <Route path="/post/:id" component={() => <h1>post</h1>} />
+          <Route component={() => <h2>404! Ruta no encontrada</h2>} />
         </Switch>
       </ThemeProvider>
     </Router>

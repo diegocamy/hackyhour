@@ -13,9 +13,13 @@ const SearchContainer = styled.div`
 const SearchPage = props => {
   useEffect(() => {
     const params = new URLSearchParams(props.location.search);
-    const searchTerm = params.get('term').split('-').join(' ');
-    console.log(searchTerm);
-  }, [props.location.search]);
+    const searchTerm = params.get('term');
+    if (searchTerm) {
+      console.log(searchTerm);
+    } else {
+      props.history.push('/');
+    }
+  }, [props.location.search, props.history]);
 
   return (
     <SearchContainer>

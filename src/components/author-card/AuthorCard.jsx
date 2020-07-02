@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 const AuthorCardWrapper = styled.div`
   margin: 15px auto;
+  border-radius: 6px;
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
   word-break: break-all;
+  box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
 
   p {
     text-align: center;
