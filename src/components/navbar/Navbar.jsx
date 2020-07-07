@@ -63,21 +63,29 @@ const Navbar = () => {
       <NavbarMenu>
         <NavItem
           middleText="Noticias"
+          linkTo="/category/noticias"
           topText="últimas"
           bottomText="x"
           hiddenBottom
         />
         <p className="separador">x</p>
-        <NavItem middleText="Campus" topText="IFSUL" bottomText="UTEC" />
+        <NavItem
+          middleText="Campus"
+          topText="IFSUL"
+          bottomText="UTEC"
+          linkTo="/category/campus"
+        />
         <p className="separador">x</p>
         <NavItem
           topText="todo sobre"
           middleText="Programacion"
           bottomText="y más"
+          linkTo="/category/programacion"
         />
         <p className="separador">x</p>
         <NavItem
           middleText="Anuncios"
+          linkTo="/category/anuncios"
           topText="HACKY HOUR"
           bottomText="x"
           hiddenBottom
@@ -86,6 +94,7 @@ const Navbar = () => {
         <NavItem
           topText="más sobre"
           middleText="Nosotros"
+          linkTo="/about"
           bottomText="x"
           hiddenBottom
         />
@@ -93,6 +102,7 @@ const Navbar = () => {
         <NavItem
           middleText="Ingresar"
           topText="participá"
+          linkTo="/login"
           bottomText="x"
           hiddenBottom
         />

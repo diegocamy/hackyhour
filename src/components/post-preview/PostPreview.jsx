@@ -7,7 +7,7 @@ const PreviewContainer = styled.div`
   word-break: break-all;
   width: 100%;
   padding: 10px 25px;
-  min-height: 350px;
+  min-height: fit-content;
   border-radius: 6px;
 
   img {

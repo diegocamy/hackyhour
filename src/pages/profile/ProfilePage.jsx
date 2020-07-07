@@ -6,7 +6,7 @@ import BigCard from '../../components/big-card/BigCard';
 
 const ProfileContainer = styled.div`
   margin: auto;
-  max-width: 900px;
+  max-width: 700px;
 `;
 
 const ProfilePage = () => {

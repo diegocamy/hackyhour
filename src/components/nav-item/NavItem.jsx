@@ -62,11 +62,12 @@ const NavItem = ({
   bottomText,
   hiddenTop,
   hiddenBottom,
+  linkTo,
   ...props
 }) => {
   return (
     <Item hiddenTop={hiddenTop} hiddenBottom={hiddenBottom}>
-      <Link to="/">
+      <Link to={linkTo}>
         <p className="top">{topText}</p>
         <h4 className="middle">{middleText}</h4>
         <p className="bottom">{bottomText}</p>

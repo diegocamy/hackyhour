@@ -18,7 +18,7 @@ const AuthorCardWrapper = styled.div`
     max-width: 550px;
   }
 
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 700px) {
     margin: 15px 10px;
   }
 `;

@@ -7,6 +7,8 @@ import SearchPage from './pages/search/SearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import CreatePostPage from './pages/create-post/CreatePostPage';
 import PostPage from './pages/post/PostPage';
+import CategoryPage from './pages/category-page/CategoryPage';
+import LoginPage from './pages/login/LoginPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -47,7 +49,9 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/category/:categoryId" component={CategoryPage} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/create" component={CreatePostPage} />
           <Route path="/profile/:id" component={ProfilePage} />
           <Route path="/post/:id" component={PostPage} />
