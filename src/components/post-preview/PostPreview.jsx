@@ -6,12 +6,18 @@ const PreviewContainer = styled.div`
   background: white;
   word-break: break-all;
   width: 100%;
-  margin: 25px auto;
-  padding: 25px;
+  padding: 10px 25px;
   min-height: 350px;
+  border-radius: 6px;
 
   img {
-    max-width: 100%;
+    width: 100% !important;
+    height: 350px !important;
+    object-fit: cover;
+  }
+
+  iframe {
+    min-width: 100%;
   }
 `;
 

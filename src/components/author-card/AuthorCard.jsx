@@ -10,7 +10,8 @@ const AuthorCardWrapper = styled.div`
   align-items: center;
   background: white;
   word-break: break-all;
-  box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
+  box-shadow: ${props =>
+    props.shadow ? '9px 7px 8px -4px rgba(0, 0, 0, 0.13)' : '0 0 0 0'};
 
   p {
     text-align: center;
@@ -44,9 +45,9 @@ const AuthorSocialMedia = styled.div`
   }
 `;
 
-const AuthorCard = ({ authorAvatar, name, bio }) => {
+const AuthorCard = ({ authorAvatar, name, bio, shadow }) => {
   return (
-    <AuthorCardWrapper>
+    <AuthorCardWrapper shadow={shadow}>
       <AuthorAvatar src={authorAvatar} alt="Author-avatar" />
       <h3>{name}</h3>
       <p>{bio}</p>

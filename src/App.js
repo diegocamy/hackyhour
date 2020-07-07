@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import SearchPage from './pages/search/SearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import CreatePostPage from './pages/create-post/CreatePostPage';
+import PostPage from './pages/post/PostPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -49,7 +50,7 @@ function App() {
           <Route path="/search" component={SearchPage} />
           <Route path="/create" component={CreatePostPage} />
           <Route path="/profile/:id" component={ProfilePage} />
-          <Route path="/post/:id" component={() => <h1>post</h1>} />
+          <Route path="/post/:id" component={PostPage} />
           <Route component={() => <h2>404! Ruta no encontrada</h2>} />
         </Switch>
       </ThemeProvider>
