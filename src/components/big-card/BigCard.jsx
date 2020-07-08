@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link, withRouter } from 'react-router-dom';
 import Button from '../button/Button';
 
 const BigCardContainer = styled.div`
@@ -9,6 +10,11 @@ const BigCardContainer = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
   box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   @media only screen and (max-width: 375px) {
     width: 95%;
@@ -78,6 +84,11 @@ const AuthorInfo = styled.div`
       font-size: 0.7rem;
       color: darkgray;
     }
+    span {
+      color: darkgray;
+      font-weight: normal;
+      margin: auto 5px;
+    }
   }
 
   button {
@@ -101,32 +112,50 @@ const AuthorInfo = styled.div`
   }
 `;
 
-const BigCard = ({ postImg, authorPhoto, authorName, postCategory }) => {
+const BigCard = ({
+  postImg,
+  postSlug,
+  authorPhoto,
+  authorName,
+  postCategory,
+  authorId,
+  category,
+  history,
+  ...props
+}) => {
   return (
     <BigCardContainer>
       <PostTitle>
-        <div className="text">
-          <h2>Title of the post</h2>
-          <p>Description of the post</p>
-        </div>
+        <Link to={`/post/${postSlug}`}>
+          <div className="text">
+            <h2>Title of the post</h2>
+            <p>Description of the post</p>
+          </div>
+        </Link>
         <div className="likes">
           <i className="fas fa-heart"></i>
           <p>35</p>
         </div>
       </PostTitle>
-      <PostImage postImg={postImg} />
+      <Link to={`/post/${postSlug}`}>
+        <PostImage postImg={postImg} />
+      </Link>
       <AuthorInfo>
-        <img src={authorPhoto} alt="author-profile-pic" />
+        <Link to={`/profile/${authorId}`}>
+          <img src={authorPhoto} alt="author-profile-pic" />
+        </Link>
         <div className="text">
           <h4>
-            {authorName} en {postCategory}
+            <Link to={`/profile/${authorId}`}>{authorName}</Link>{' '}
+            <span>en</span>{' '}
+            <Link to={`/category/${category}`}>{postCategory}</Link>
           </h4>
           <p>Hace 2 días</p>
         </div>
-        <Button>Leer</Button>
+        <Button onClick={() => history.push(`/post/${postSlug}`)}>Leer</Button>
       </AuthorInfo>
     </BigCardContainer>
   );
 };
 
-export default BigCard;
+export default withRouter(BigCard);

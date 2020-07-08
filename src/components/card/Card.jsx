@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CardContainer = styled.div`
   border-radius: 5px;
@@ -10,6 +11,11 @@ const CardContainer = styled.div`
   margin-bottom: 15px;
 
   box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const CardTop = styled.div`
@@ -100,26 +106,45 @@ const CardBody = styled.div`
   }
 `;
 
-const Card = ({ image, title, summary, category, widthInPx, ...props }) => {
+const Card = ({
+  image,
+  title,
+  summary,
+  category,
+  widthInPx,
+  postSlug,
+  authorId,
+  ...props
+}) => {
   return (
     <CardContainer widthInPx={widthInPx}>
-      <CardTop image={image}>
-        <div className="background-image" />
-      </CardTop>
+      <Link to={`/post/${postSlug}`}>
+        <CardTop image={image}>
+          <div className="background-image" />
+        </CardTop>
+      </Link>
       <CardBody>
-        <p className="badge">{category}</p>
+        <Link to={`/category/${category}`}>
+          <p className="badge">{category}</p>
+        </Link>
         <div className="content">
-          <h4>{title.slice(0, 52)}</h4>
-          <p>{summary.slice(0, 47) + '...'}</p>
-          <hr className="separador" />
+          <Link to={`/post/${postSlug}`}>
+            <h4>{title.slice(0, 52)}</h4>
+            <p>{summary.slice(0, 47) + '...'}</p>
+            <hr className="separador" />
+          </Link>
         </div>
         <div className="author-info">
-          <img
-            src="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-            alt="avatar-author"
-          />
+          <Link to={`/profile/${authorId}`}>
+            <img
+              src="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
+              alt="avatar-author"
+            />
+          </Link>
           <div className="details">
-            <h5>Denis Mischantruk</h5>
+            <Link to={`/profile/${authorId}`}>
+              <h5>Denis Mischantruk</h5>
+            </Link>
             <p>Yesterday</p>
           </div>
           <div className="likes">
