@@ -9,6 +9,7 @@ import CreatePostPage from './pages/create-post/CreatePostPage';
 import PostPage from './pages/post/PostPage';
 import CategoryPage from './pages/category-page/CategoryPage';
 import LoginPage from './pages/login/LoginPage';
+import NotFoundPage from './pages/not-found/NotFoundPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -55,7 +56,7 @@ function App() {
           <Route path="/create" component={CreatePostPage} />
           <Route path="/profile/:id" component={ProfilePage} />
           <Route path="/post/:id" component={PostPage} />
-          <Route component={() => <h2>404! Ruta no encontrada</h2>} />
+          <Route component={NotFoundPage} />
         </Switch>
       </ThemeProvider>
     </Router>
