@@ -59,12 +59,16 @@ const LoginContainer = styled.div`
   }
 `;
 
+const googleSignIn = async () => {
+  window.open('http://localhost:5000/api/users/signinwithgoogle', '_self');
+};
+
 const LoginPage = () => {
   return (
     <LoginContainer>
       <h2>Iniciar Sesión</h2>
       <hr />
-      <button className="google">
+      <button className="google" onClick={googleSignIn}>
         <i className="fab fa-google"></i>Iniciar Sesión con Google
       </button>
       <button className="github">
