@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from '../../axios/axios';
 
 const LoginContainer = styled.div`
   background: white;
@@ -61,7 +60,11 @@ const LoginContainer = styled.div`
 `;
 
 const googleSignIn = async () => {
-  window.open('http://localhost:5000/api/users/signinwithgoogle', '_self');
+  window.open('http://localhost:5000/api/auth/signinwithgoogle', '_self');
+};
+
+const githubSignIn = async () => {
+  window.open('http://localhost:5000/api/auth/signinwithgithub', '_self');
 };
 
 const LoginPage = () => {
@@ -72,11 +75,7 @@ const LoginPage = () => {
       <button className="google" onClick={googleSignIn}>
         <i className="fab fa-google"></i>Iniciar Sesión con Google
       </button>
-      <button
-        className="github"
-        onClick={() => {
-          axios.get('/');
-        }}>
+      <button className="github" onClick={githubSignIn}>
         <i className="fab fa-github"></i>Iniciar Sesión con GitHub
       </button>
       <span></span>
