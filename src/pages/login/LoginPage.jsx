@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from '../../axios/axios';
 
 const LoginContainer = styled.div`
   background: white;
@@ -71,7 +72,11 @@ const LoginPage = () => {
       <button className="google" onClick={googleSignIn}>
         <i className="fab fa-google"></i>Iniciar Sesión con Google
       </button>
-      <button className="github">
+      <button
+        className="github"
+        onClick={() => {
+          axios.get('/');
+        }}>
         <i className="fab fa-github"></i>Iniciar Sesión con GitHub
       </button>
       <span></span>
