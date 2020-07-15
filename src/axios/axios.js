@@ -13,7 +13,9 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  response => {},
+  response => {
+    return response;
+  },
   error => {
     if (error.response.status === 401) {
       console.log('UNAUTH');

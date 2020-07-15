@@ -63,10 +63,11 @@ const NavItem = ({
   hiddenTop,
   hiddenBottom,
   linkTo,
+  onClick,
   ...props
 }) => {
   return (
-    <Item hiddenTop={hiddenTop} hiddenBottom={hiddenBottom}>
+    <Item hiddenTop={hiddenTop} hiddenBottom={hiddenBottom} onClick={onClick}>
       <Link to={linkTo}>
         <p className="top">{topText}</p>
         <h4 className="middle">{middleText}</h4>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Navbar from './components/navbar/Navbar';
@@ -10,6 +10,8 @@ import PostPage from './pages/post/PostPage';
 import CategoryPage from './pages/category-page/CategoryPage';
 import LoginPage from './pages/login/LoginPage';
 import NotFoundPage from './pages/not-found/NotFoundPage';
+import { UserContext } from './context/userContext';
+import axios from './axios/axios';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -43,23 +45,38 @@ const theme = {
 };
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await axios.get('/api/auth/islogged');
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
+
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/category/:categoryId" component={CategoryPage} />
-          <Route path="/search" component={SearchPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/create" component={CreatePostPage} />
-          <Route path="/profile/:id" component={ProfilePage} />
-          <Route path="/post/:id" component={PostPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </ThemeProvider>
-    </Router>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/category/:categoryId" component={CategoryPage} />
+            <Route path="/search" component={SearchPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/create" component={CreatePostPage} />
+            <Route path="/profile/:id" component={ProfilePage} />
+            <Route path="/post/:id" component={PostPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </ThemeProvider>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

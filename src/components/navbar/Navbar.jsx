@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
+import { UserContext } from '../../context/userContext';
 import logo from '../../assets/logo.png';
 import background from '../../assets/background.png';
 import NavItem from '../nav-item/NavItem';
-import { Link } from 'react-router-dom';
+import axios from '../../axios/axios';
 
 const HeaderBackground = styled.div`
   background: url(${background});
@@ -54,6 +56,8 @@ const NavbarMenu = styled.div`
 `;
 
 const Navbar = () => {
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <div style={{ position: 'relative' }}>
       <HeaderBackground />
@@ -99,13 +103,28 @@ const Navbar = () => {
           hiddenBottom
         />
         <p className="separador">x</p>
-        <NavItem
-          middleText="Ingresar"
-          topText="participá"
-          linkTo="/login"
-          bottomText="x"
-          hiddenBottom
-        />
+        {!user ? (
+          <NavItem
+            middleText="Ingresar"
+            topText="participá"
+            linkTo="/login"
+            bottomText="x"
+            hiddenBottom
+          />
+        ) : (
+          <NavItem
+            middleText="Salir"
+            topText="x"
+            bottomText="x"
+            hiddenTop
+            hiddenBottom
+            linkTo="/"
+            onClick={e => {
+              e.preventDefault();
+              axios.get('/api/auth/logout').then(res => setUser(res.data.user));
+            }}
+          />
+        )}
       </NavbarMenu>
     </div>
   );
