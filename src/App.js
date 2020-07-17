@@ -12,6 +12,8 @@ import LoginPage from './pages/login/LoginPage';
 import NotFoundPage from './pages/not-found/NotFoundPage';
 import { UserContext } from './context/userContext';
 import axios from './axios/axios';
+import DashboardPage from './pages/dashboard/DashboardPage';
+import EditProfilePage from './pages/edit-profile/EditProfilePage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -67,6 +69,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/category/:categoryId" component={CategoryPage} />
+            <Route path="/dashboard" component={DashboardPage} />
+            <Route path="/edit-profile" component={EditProfilePage} />
             <Route path="/search" component={SearchPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/create" component={CreatePostPage} />

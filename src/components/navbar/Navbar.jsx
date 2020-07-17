@@ -112,18 +112,31 @@ const Navbar = () => {
             hiddenBottom
           />
         ) : (
-          <NavItem
-            middleText="Salir"
-            topText="x"
-            bottomText="x"
-            hiddenTop
-            hiddenBottom
-            linkTo="/"
-            onClick={e => {
-              e.preventDefault();
-              axios.get('/api/auth/logout').then(res => setUser(res.data.user));
-            }}
-          />
+          <>
+            <NavItem
+              middleText="Perfil"
+              topText="x"
+              bottomText="x"
+              hiddenTop
+              hiddenBottom
+              linkTo="/dashboard"
+            />
+            <p className="separador">x</p>
+            <NavItem
+              middleText="Salir"
+              topText="x"
+              bottomText="x"
+              hiddenTop
+              hiddenBottom
+              linkTo="/"
+              onClick={e => {
+                e.preventDefault();
+                axios
+                  .get('/api/auth/logout')
+                  .then(res => setUser(res.data.user));
+              }}
+            />
+          </>
         )}
       </NavbarMenu>
     </div>

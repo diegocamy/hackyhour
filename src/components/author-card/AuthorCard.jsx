@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import Button from '../button/Button';
 
 const AuthorCardWrapper = styled.div`
+  position: relative;
   margin: 15px auto;
   border-radius: 6px;
   padding: 15px;
@@ -16,6 +19,12 @@ const AuthorCardWrapper = styled.div`
   p {
     text-align: center;
     max-width: 550px;
+  }
+
+  button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
   }
 
   @media only screen and (max-width: 700px) {
@@ -45,9 +54,16 @@ const AuthorSocialMedia = styled.div`
   }
 `;
 
-const AuthorCard = ({ authorAvatar, name, bio, shadow }) => {
+const AuthorCard = ({ authorAvatar, name, bio, shadow, editable, history }) => {
   return (
     <AuthorCardWrapper shadow={shadow}>
+      {editable && (
+        <Button
+          className="edit-button"
+          onClick={() => history.push('/edit-profile')}>
+          <i className="fas fa-edit"></i>
+        </Button>
+      )}
       <AuthorAvatar src={authorAvatar} alt="Author-avatar" />
       <h3>{name}</h3>
       <p>{bio}</p>
@@ -62,4 +78,4 @@ const AuthorCard = ({ authorAvatar, name, bio, shadow }) => {
   );
 };
 
-export default AuthorCard;
+export default withRouter(AuthorCard);
