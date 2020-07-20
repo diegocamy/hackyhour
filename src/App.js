@@ -51,10 +51,14 @@ function App() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const {
-        data: { user },
-      } = await axios.get('/api/auth/islogged');
-      setUser(user);
+      try {
+        const {
+          data: { user },
+        } = await axios.get('/api/auth/islogged');
+        setUser(user);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchUser();

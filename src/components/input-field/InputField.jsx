@@ -7,9 +7,17 @@ const StyledInput = styled.input`
   padding: 5px 15px;
 `;
 
-const InputField = ({ value, onChange, placeholder, fontSize, ...props }) => {
+const InputField = ({
+  value,
+  readOnly,
+  onChange,
+  placeholder,
+  fontSize,
+  ...props
+}) => {
   return (
     <StyledInput
+      readOnly={readOnly}
       value={value}
       onChange={onChange}
       placeholder={placeholder}

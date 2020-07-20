@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from '../../axios/axios';
 import InputField from '../../components/input-field/InputField';
 import TextEditor from '../../components/text-editor/TextEditor';
 import Button from '../../components/button/Button';
@@ -21,9 +22,13 @@ const CreatePostWrapper = styled.div`
   }
 `;
 
-const CreatePostPage = () => {
-  const [content, setContent] = useState('');
+const CreatePostPage = ({ history }) => {
+  const [posting, setPosting] = useState(false);
+  const [post, setPost] = useState('');
   const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
+  const [category, setCategory] = useState('programacion');
+  const [featuredImg, setFeaturedImg] = useState('');
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -36,7 +41,16 @@ const CreatePostPage = () => {
       setDescription(savedPost.description);
     }
     if (savedPost && savedPost.content) {
-      setContent(savedPost.content);
+      setPost(savedPost.content);
+    }
+    if (savedPost && savedPost.slug) {
+      setSlug(savedPost.slug);
+    }
+    if (savedPost && savedPost.featured) {
+      setFeaturedImg(savedPost.featured);
+    }
+    if (savedPost && savedPost.category) {
+      setCategory(savedPost.category);
     }
   }, []);
 
@@ -44,11 +58,18 @@ const CreatePostPage = () => {
     const postObject = {
       title,
       description,
-      content,
+      content: post,
+      slug,
+      featured: featuredImg,
+      category,
     };
     localStorage.setItem('blogpost', JSON.stringify(postObject));
-    console.log(content);
-  }, [content, title, description]);
+  }, [post, title, description, slug, featuredImg, category]);
+
+  useEffect(() => {
+    const postSlug = title.toLowerCase().split(' ').join('-');
+    setSlug(postSlug);
+  }, [title]);
 
   return (
     <CreatePostWrapper>
@@ -66,15 +87,47 @@ const CreatePostPage = () => {
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
+        <br />
+        <label>Imagen Destacada: </label>
+        <InputField
+          placeholder="Link de la imagen de portada del post"
+          value={featuredImg}
+          onChange={e => setFeaturedImg(e.target.value)}
+        />
+        <br />
+        <label>Categoria:</label>
+        <select
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+          placeholder="Seleccionar categoría">
+          <option value="anuncios">Anuncios</option>
+          <option value="campus">Campus</option>
+          <option value="hackyhour">HackyHour</option>
+          <option value="noticias">Noticias</option>
+          <option value="programacion">Programacion</option>
+        </select>
       </form>
       <h4>Post:</h4>
-      <TextEditor content={content} setContent={setContent} />
+      <TextEditor content={post} setContent={setPost} />
       <div className="buttons">
         <Button
-          onClick={() => {
+          onClick={async () => {
+            setPosting(true);
+            const {
+              data: { post: newPost },
+            } = await axios.post('/api/posts', {
+              title,
+              category,
+              slug,
+              description,
+              featuredImage: featuredImg,
+              post,
+            });
             localStorage.removeItem('blogpost');
+            setPosting(false);
+            history.push(`/post/${newPost.slug}`);
           }}>
-          Publicar
+          {posting ? 'Publicando' : 'Publicar'}
         </Button>
       </div>
     </CreatePostWrapper>
