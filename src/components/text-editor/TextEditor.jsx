@@ -4,7 +4,6 @@ import JoditEditor from 'jodit-react';
 const config = {
   readonly: false,
   spellcheck: false,
-  iframe: true,
   language: 'es',
   buttons: [
     'bold',
