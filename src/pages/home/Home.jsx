@@ -4,8 +4,10 @@ import axios from '../../axios/axios';
 import CategoryContainer from '../../components/category-container/CategoryContainer';
 import SearchForm from '../../components/search-form/SearchForm';
 
+//GET POSTS FUNCTIONS
 const getPopularPosts = posts => {
-  return posts.sort((curr, nextP) => nextP.likes - curr.likes).slice(0, 4);
+  const arr = [...posts];
+  return arr.sort((curr, nextP) => nextP.likes - curr.likes).slice(0, 4);
 };
 
 const getRecentPosts = posts => posts.slice(0, 4);
@@ -13,11 +15,25 @@ const getRecentPosts = posts => posts.slice(0, 4);
 const getProgrammingPosts = posts =>
   posts.filter(p => p.category === 'programacion').slice(0, 4);
 
+const getNewsPosts = posts =>
+  posts.filter(p => p.category === 'noticias').slice(0, 4);
+
+const getCampusPosts = posts =>
+  posts.filter(p => p.category === 'campus').slice(0, 4);
+
+const getAnnouncementsPosts = posts =>
+  posts.filter(p => p.category === 'anuncios').slice(0, 4);
+
+/////////
+
 const Home = () => {
   const [posts, setPosts] = useState(null);
   const [popular, setPopular] = useState([]);
   const [recent, setRecent] = useState([]);
   const [programming, setProgramming] = useState([]);
+  const [news, setNews] = useState([]);
+  const [campus, setCampus] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -37,7 +53,10 @@ const Home = () => {
     if (posts) {
       setPopular(getPopularPosts(posts));
       setRecent(getRecentPosts(posts));
+      setNews(getNewsPosts(posts));
       setProgramming(getProgrammingPosts(posts));
+      setAnnouncements(getAnnouncementsPosts(posts));
+      setCampus(getCampusPosts(posts));
     }
   }, [posts]);
 
@@ -51,6 +70,9 @@ const Home = () => {
       <CategoryContainer name="Populares" posts={popular} />
       <CategoryContainer name="Recientes" posts={recent} />
       <CategoryContainer name="Programacion" posts={programming} />
+      <CategoryContainer name="Noticias" posts={news} />
+      <CategoryContainer name="Anuncios" posts={announcements} />
+      <CategoryContainer name="Campus" posts={campus} />
     </div>
   );
 };

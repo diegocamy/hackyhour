@@ -5,17 +5,54 @@ import { Link } from 'react-router-dom';
 const CardContainer = styled.div`
   border-radius: 5px;
   margin: 0 auto;
-  height: fit-content;
-  max-height: 375px;
+  height: 375px;
   width: ${props => props.widthInPx}px;
   background: white;
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 
   box-shadow: 9px 7px 8px -4px rgba(0, 0, 0, 0.13);
 
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    justify-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 10px;
+    padding: 0 15px;
+
+    img {
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .details {
+      p {
+        margin-top: -5px;
+        font-size: 0.7rem;
+        color: darkgray;
+      }
+    }
+
+    .likes {
+      display: flex;
+      align-items: center;
+      justify-self: end;
+      margin-left: auto;
+      color: red;
+
+      p {
+        margin: 5px;
+      }
+    }
   }
 `;
 
@@ -47,6 +84,7 @@ const CardBody = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  padding-bottom: 0;
 
   .badge {
     margin-bottom: 10px;
@@ -66,6 +104,7 @@ const CardBody = styled.div`
     }
 
     p {
+      flex: 1;
       line-height: 1;
     }
 
@@ -73,38 +112,7 @@ const CardBody = styled.div`
       border: 2px solid ${({ theme }) => theme.yellow};
       width: 50%;
       margin: 15px auto;
-    }
-  }
-
-  .author-info {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-
-    img {
-      width: 40px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-
-    .details {
-      p {
-        margin-top: -5px;
-        font-size: 0.7rem;
-        color: darkgray;
-      }
-    }
-
-    .likes {
-      display: flex;
-      align-items: center;
-      justify-self: end;
-      margin-left: auto;
-      color: red;
-
-      p {
-        margin: 5px;
-      }
+      margin-bottom: 0;
     }
   }
 `;
@@ -140,22 +148,22 @@ const Card = ({
             <hr className="separador" />
           </Link>
         </div>
-        <div className="author-info">
-          <Link to={`/profile/${authorId}`}>
-            <img src={authorAvatar} alt="avatar-author" />
-          </Link>
-          <div className="details">
-            <Link to={`/profile/${authorId}`}>
-              <h5>{authorName}</h5>
-            </Link>
-            <p>Yesterday</p>
-          </div>
-          <div className="likes">
-            <i className="fas fa-heart"></i>
-            <p>{likes}</p>
-          </div>
-        </div>
       </CardBody>
+      <div className="author-info">
+        <Link to={`/profile/${authorId}`}>
+          <img src={authorAvatar} alt="avatar-author" />
+        </Link>
+        <div className="details">
+          <Link to={`/profile/${authorId}`}>
+            <h5>{authorName}</h5>
+          </Link>
+          <p>Yesterday</p>
+        </div>
+        <div className="likes">
+          <i className="fas fa-heart"></i>
+          <p>{likes}</p>
+        </div>
+      </div>
     </CardContainer>
   );
 };

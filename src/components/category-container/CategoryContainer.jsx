@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../card/Card';
+import Button from '../button/Button';
 
 const Category = styled.div`
   display: flex;
@@ -10,6 +12,19 @@ const Category = styled.div`
   .cards {
     display: flex;
     flex-direction: column;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .read-more {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 10px;
   }
 
   @media only screen and (min-width: 670px) {
@@ -50,11 +65,13 @@ const CategoryTitle = styled.div`
   }
 `;
 
-const CategoryContainer = ({ name, posts, ...props }) => {
+const CategoryContainer = ({ name, posts, history, ...props }) => {
   return (
     <Category>
       <CategoryTitle>
-        <h2>{name}</h2>
+        <Link to={`/category/${name.toLowerCase()}`}>
+          <h2>{name}</h2>
+        </Link>
         <div className="background-line" />
       </CategoryTitle>
       <div className="cards">
@@ -76,8 +93,14 @@ const CategoryContainer = ({ name, posts, ...props }) => {
           );
         })}
       </div>
+      <div className="read-more">
+        <Button
+          onClick={() => {
+            history.push(`/category/${name.toLowerCase()}`);
+          }}>{`Ver más >`}</Button>
+      </div>
     </Category>
   );
 };
 
-export default CategoryContainer;
+export default withRouter(CategoryContainer);
