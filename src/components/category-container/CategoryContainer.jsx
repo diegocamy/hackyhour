@@ -58,34 +58,23 @@ const CategoryContainer = ({ name, posts, ...props }) => {
         <div className="background-line" />
       </CategoryTitle>
       <div className="cards">
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          category="Noticias"
-          title="Tu Primer Hola Mundo En JAVA"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Campus"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://wesbos.com/static/371c801fdafdceaf31fae3f9aa991c37/9a128/sick-new-site.jpg"
-          category="Anuncios"
-          title="Tu Primer Hola Mundo En JAVA"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
+        {posts.map(p => {
+          return (
+            <Card
+              widthInPx={300}
+              key={p._id.toString()}
+              image={p.featuredImage}
+              category={p.category}
+              title={p.title}
+              summary={p.description}
+              postSlug={p.slug}
+              likes={p.likes}
+              authorId={p.author_info[0]._id.toString()}
+              authorName={p.author_info[0].name}
+              authorAvatar={p.author_info[0].picture}
+            />
+          );
+        })}
       </div>
     </Category>
   );

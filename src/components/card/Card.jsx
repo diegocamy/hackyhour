@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 const CardContainer = styled.div`
   border-radius: 5px;
   margin: 0 auto;
-  height: 375px;
+  height: fit-content;
+  max-height: 375px;
   width: ${props => props.widthInPx}px;
   background: white;
   margin-bottom: 15px;
@@ -78,6 +79,7 @@ const CardBody = styled.div`
   .author-info {
     display: flex;
     align-items: center;
+    justify-content: start;
 
     img {
       width: 40px;
@@ -96,7 +98,8 @@ const CardBody = styled.div`
     .likes {
       display: flex;
       align-items: center;
-      margin-left: 20px;
+      justify-self: end;
+      margin-left: auto;
       color: red;
 
       p {
@@ -114,6 +117,9 @@ const Card = ({
   widthInPx,
   postSlug,
   authorId,
+  likes,
+  authorAvatar,
+  authorName,
   ...props
 }) => {
   return (
@@ -136,20 +142,17 @@ const Card = ({
         </div>
         <div className="author-info">
           <Link to={`/profile/${authorId}`}>
-            <img
-              src="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-              alt="avatar-author"
-            />
+            <img src={authorAvatar} alt="avatar-author" />
           </Link>
           <div className="details">
             <Link to={`/profile/${authorId}`}>
-              <h5>Denis Mischantruk</h5>
+              <h5>{authorName}</h5>
             </Link>
             <p>Yesterday</p>
           </div>
           <div className="likes">
             <i className="fas fa-heart"></i>
-            <p>35</p>
+            <p>{likes}</p>
           </div>
         </div>
       </CardBody>
