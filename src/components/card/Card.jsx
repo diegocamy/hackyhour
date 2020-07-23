@@ -23,10 +23,10 @@ const CardTop = styled.div`
   position: relative;
   overflow: hidden;
   height: 175px;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
 
   .background-image {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     position: absolute;
     height: 100%;
     width: 100%;
