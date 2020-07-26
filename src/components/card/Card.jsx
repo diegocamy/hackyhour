@@ -161,7 +161,7 @@ const Card = ({
         </div>
         <div className="likes">
           <i className="fas fa-heart"></i>
-          <p>{likes}</p>
+          <p>{(likes && Object.keys(likes).length) || '0'}</p>
         </div>
       </div>
     </CardContainer>

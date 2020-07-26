@@ -7,7 +7,12 @@ import SearchForm from '../../components/search-form/SearchForm';
 //GET POSTS FUNCTIONS
 const getPopularPosts = posts => {
   const arr = [...posts];
-  return arr.sort((curr, nextP) => nextP.likes - curr.likes).slice(0, 4);
+  return arr
+    .sort(
+      (curr, nextP) =>
+        Object.keys(nextP.likes).length - Object.keys(curr.likes).length
+    )
+    .slice(0, 4);
 };
 
 const getRecentPosts = posts => posts.slice(0, 4);

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 import axios from '../../axios/axios';
 import styled from 'styled-components';
 import PostPreview from '../../components/post-preview/PostPreview';
@@ -48,6 +49,7 @@ const PostPageWrapper = styled.div`
 `;
 
 const PostPage = ({ history, match }) => {
+  const { user } = useContext(UserContext);
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
 
@@ -62,7 +64,7 @@ const PostPage = ({ history, match }) => {
           setPost({ ...post, author });
         }
       } catch (error) {
-        if (error.response.status === 404) {
+        if (error.response && error.response.status === 404) {
           history.push('/404');
         }
       }
@@ -70,6 +72,28 @@ const PostPage = ({ history, match }) => {
 
     getPost();
   }, [match.params.id, history]);
+
+  const likePost = async () => {
+    try {
+      const {
+        data: { post: blogPost, author },
+      } = await axios.post(`/api/posts/like/${post._id}`);
+      setPost({ ...blogPost, author });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dislikePost = async () => {
+    try {
+      const {
+        data: { post: blogPost, author },
+      } = await axios.post(`/api/posts/dislike/${post._id}`);
+      setPost({ ...blogPost, author });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!post) return <h2>cargando...</h2>;
 
@@ -80,10 +104,21 @@ const PostPage = ({ history, match }) => {
       <PostPageWrapper>
         <h1>{post.title}</h1>
         <PostPreview post={post.post} />
-        <div className="like">
-          {post.likes}
-          <i className="fas fa-heart"></i>
-        </div>
+        {/* CHECK IF USER ALREADY LIKED POST */}
+        {post.likes[user._id] ? (
+          // IF ALREADY LIKED SHOW A RED HEART
+          <div className="like" onClick={dislikePost}>
+            {post.likes && Object.keys(post.likes).length}
+            <i className="fas fa-heart" style={{ color: 'red' }}></i>
+          </div>
+        ) : (
+          //IF USER DIDN'T LIKE THE POST, SHOW A GREY HEART
+          <div className="like" onClick={likePost}>
+            {post.likes && Object.keys(post.likes).length}
+            <i className="fas fa-heart"></i>
+          </div>
+        )}
+
         <AuthorCard
           authorAvatar={post.author.picture}
           name={post.author.name}
