@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from '../../axios/axios';
 import styled from 'styled-components';
 import Card from '../../components/card/Card';
 
@@ -17,67 +18,54 @@ const CategoryPageWrapper = styled.div`
   }
 `;
 
-const CategoryPage = props => {
+const CategoryPage = ({ match }) => {
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const { data: fetchedPosts } = await axios.get(
+          `/api/posts/category/${match.params.categoryId}`
+        );
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadPosts();
+  }, [match]);
+
+  if (!posts) return <h2>Loading!</h2>;
+
+  if (posts.length === 0)
+    return (
+      <h2 style={{ textAlign: 'center', margin: '15px' }}>
+        No posts for this category
+      </h2>
+    );
+
   return (
     <CategoryPageWrapper>
-      <h1>{props.match.params.categoryId}</h1>
+      <h1>{match.params.categoryId}</h1>
       <div className="cards">
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
-        <Card
-          widthInPx={300}
-          image="https://pbs.twimg.com/media/ENIydNFXkAIYCVV.jpg"
-          category="Programacion"
-          title="Tu Primer Hola Mundo En JAVA con Eclipse en Windowssasd"
-          summary="lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum lreom ipsum "
-        />
+        {posts.map(p => {
+          return (
+            <Card
+              widthInPx={300}
+              key={p._id.toString()}
+              image={p.featuredImage}
+              category={p.category}
+              title={p.title}
+              summary={p.description}
+              postSlug={p.slug}
+              likes={p.likes}
+              authorId={p.author_info[0]._id.toString()}
+              authorName={p.author_info[0].name}
+              authorAvatar={p.author_info[0].picture}
+            />
+          );
+        })}
       </div>
     </CategoryPageWrapper>
   );

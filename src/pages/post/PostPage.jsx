@@ -31,7 +31,7 @@ const PostPageWrapper = styled.div`
       color: darkgray;
 
       &:hover {
-        cursor: pointer;
+        cursor: ${props => (props.user ? 'pointer' : 'cursor')};
       }
     }
   }
@@ -75,6 +75,7 @@ const PostPage = ({ history, match }) => {
 
   const likePost = async () => {
     try {
+      if (!user) return;
       const {
         data: { post: blogPost, author },
       } = await axios.post(`/api/posts/like/${post._id}`);
@@ -86,6 +87,7 @@ const PostPage = ({ history, match }) => {
 
   const dislikePost = async () => {
     try {
+      if (!user) return;
       const {
         data: { post: blogPost, author },
       } = await axios.post(`/api/posts/dislike/${post._id}`);
@@ -101,11 +103,11 @@ const PostPage = ({ history, match }) => {
 
   if (post && !error)
     return (
-      <PostPageWrapper>
+      <PostPageWrapper user={user}>
         <h1>{post.title}</h1>
         <PostPreview post={post.post} />
         {/* CHECK IF USER ALREADY LIKED POST */}
-        {post.likes[user._id] ? (
+        {user && post.likes[user._id] ? (
           // IF ALREADY LIKED SHOW A RED HEART
           <div className="like" onClick={dislikePost}>
             {post.likes && Object.keys(post.likes).length}
