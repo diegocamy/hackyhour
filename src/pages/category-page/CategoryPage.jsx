@@ -48,8 +48,8 @@ const CategoryPage = ({ match }) => {
   return (
     <CategoryPageWrapper>
       <h1>{match.params.categoryId}</h1>
-      <div className="cards">
-        {posts.map(p => {
+      <div className='cards'>
+        {posts.map((p) => {
           return (
             <Card
               widthInPx={300}
@@ -63,6 +63,7 @@ const CategoryPage = ({ match }) => {
               authorId={p.author_info[0]._id.toString()}
               authorName={p.author_info[0].name}
               authorAvatar={p.author_info[0].picture}
+              updatedAt={p.updatedAt}
             />
           );
         })}

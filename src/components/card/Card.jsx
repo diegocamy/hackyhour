@@ -1,12 +1,16 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/es';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+moment.locale('es');
 
 const CardContainer = styled.div`
   border-radius: 5px;
   margin: 0 auto;
   height: 375px;
-  width: ${props => props.widthInPx}px;
+  width: ${(props) => props.widthInPx}px;
   background: white;
   margin-bottom: 15px;
   display: flex;
@@ -67,7 +71,7 @@ const CardTop = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    background: url(${props => props.image});
+    background: url(${(props) => props.image});
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -88,7 +92,7 @@ const CardBody = styled.div`
 
   .badge {
     margin-bottom: 10px;
-    background: ${props => props.theme.blue};
+    background: ${(props) => props.theme.blue};
     color: white;
     padding: 0 6px;
     border-radius: 15px;
@@ -128,39 +132,40 @@ const Card = ({
   likes,
   authorAvatar,
   authorName,
+  updatedAt,
   ...props
 }) => {
   return (
     <CardContainer widthInPx={widthInPx}>
       <Link to={`/post/${postSlug}`}>
         <CardTop image={image}>
-          <div className="background-image" />
+          <div className='background-image' />
         </CardTop>
       </Link>
       <CardBody>
         <Link to={`/category/${category}`}>
-          <p className="badge">{category}</p>
+          <p className='badge'>{category}</p>
         </Link>
-        <div className="content">
+        <div className='content'>
           <Link to={`/post/${postSlug}`}>
             <h4>{title.slice(0, 52)}</h4>
             <p>{summary.slice(0, 47) + '...'}</p>
-            <hr className="separador" />
+            <hr className='separador' />
           </Link>
         </div>
       </CardBody>
-      <div className="author-info">
+      <div className='author-info'>
         <Link to={`/profile/${authorId}`}>
-          <img src={authorAvatar} alt="avatar-author" />
+          <img src={authorAvatar} alt='avatar-author' />
         </Link>
-        <div className="details">
+        <div className='details'>
           <Link to={`/profile/${authorId}`}>
             <h5>{authorName}</h5>
           </Link>
-          <p>Yesterday</p>
+          <p>{moment(updatedAt).startOf('minute').fromNow()}</p>
         </div>
-        <div className="likes">
-          <i className="fas fa-heart"></i>
+        <div className='likes'>
+          <i className='fas fa-heart'></i>
           <p>{(likes && Object.keys(likes).length) || '0'}</p>
         </div>
       </div>

@@ -72,10 +72,10 @@ const CategoryContainer = ({ name, posts, history, ...props }) => {
         <Link to={`/category/${name.toLowerCase()}`}>
           <h2>{name}</h2>
         </Link>
-        <div className="background-line" />
+        <div className='background-line' />
       </CategoryTitle>
-      <div className="cards">
-        {posts.map(p => {
+      <div className='cards'>
+        {posts.map((p) => {
           return (
             <Card
               widthInPx={300}
@@ -89,15 +89,17 @@ const CategoryContainer = ({ name, posts, history, ...props }) => {
               authorId={p.author_info[0]._id.toString()}
               authorName={p.author_info[0].name}
               authorAvatar={p.author_info[0].picture}
+              updatedAt={p.updatedAt}
             />
           );
         })}
       </div>
-      <div className="read-more">
+      <div className='read-more'>
         <Button
           onClick={() => {
             history.push(`/category/${name.toLowerCase()}`);
-          }}>{`Ver más >`}</Button>
+          }}
+        >{`Ver más >`}</Button>
       </div>
     </Category>
   );
