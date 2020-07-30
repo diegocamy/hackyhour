@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
+import 'moment/locale/es';
 import { Link, withRouter } from 'react-router-dom';
 import Button from '../button/Button';
 
@@ -24,7 +26,7 @@ const BigCardContainer = styled.div`
 const PostImage = styled.div`
   width: 100%;
   height: 150px;
-  background: url(${props => props.postImg});
+  background: url(${(props) => props.postImg});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -35,6 +37,7 @@ const PostTitle = styled.div`
   padding: 15px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   .text {
     flex: 1;
@@ -121,20 +124,24 @@ const BigCard = ({
   authorId,
   category,
   history,
+  updatedAt,
+  title,
+  description,
+  likes,
   ...props
 }) => {
   return (
     <BigCardContainer>
       <PostTitle>
         <Link to={`/post/${postSlug}`}>
-          <div className="text">
-            <h2>Title of the post</h2>
-            <p>Description of the post</p>
+          <div className='text'>
+            <h2>{title}</h2>
+            <p>{description}</p>
           </div>
         </Link>
-        <div className="likes">
-          <i className="fas fa-heart"></i>
-          <p>35</p>
+        <div className='likes'>
+          <i className='fas fa-heart'></i>
+          <p>{Object.keys(likes).length || '0'}</p>
         </div>
       </PostTitle>
       <Link to={`/post/${postSlug}`}>
@@ -142,15 +149,15 @@ const BigCard = ({
       </Link>
       <AuthorInfo>
         <Link to={`/profile/${authorId}`}>
-          <img src={authorPhoto} alt="author-profile-pic" />
+          <img src={authorPhoto} alt='author-profile-pic' />
         </Link>
-        <div className="text">
+        <div className='text'>
           <h4>
             <Link to={`/profile/${authorId}`}>{authorName}</Link>{' '}
             <span>en</span>{' '}
             <Link to={`/category/${category}`}>{postCategory}</Link>
           </h4>
-          <p>Hace 2 días</p>
+          <p>{moment(updatedAt).startOf('minute').fromNow()}</p>
         </div>
         <Button onClick={() => history.push(`/post/${postSlug}`)}>Leer</Button>
       </AuthorInfo>
