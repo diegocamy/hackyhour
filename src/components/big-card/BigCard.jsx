@@ -26,7 +26,7 @@ const BigCardContainer = styled.div`
 const PostImage = styled.div`
   width: 100%;
   height: 150px;
-  background: url(${(props) => props.postImg});
+  background: url(${props => props.postImg});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -134,14 +134,14 @@ const BigCard = ({
     <BigCardContainer>
       <PostTitle>
         <Link to={`/post/${postSlug}`}>
-          <div className='text'>
+          <div className="text">
             <h2>{title}</h2>
             <p>{description}</p>
           </div>
         </Link>
-        <div className='likes'>
-          <i className='fas fa-heart'></i>
-          <p>{Object.keys(likes).length || '0'}</p>
+        <div className="likes">
+          <i className="fas fa-heart"></i>
+          <p>{(likes && Object.keys(likes).length) || '0'}</p>
         </div>
       </PostTitle>
       <Link to={`/post/${postSlug}`}>
@@ -149,9 +149,9 @@ const BigCard = ({
       </Link>
       <AuthorInfo>
         <Link to={`/profile/${authorId}`}>
-          <img src={authorPhoto} alt='author-profile-pic' />
+          <img src={authorPhoto} alt="author-profile-pic" />
         </Link>
-        <div className='text'>
+        <div className="text">
           <h4>
             <Link to={`/profile/${authorId}`}>{authorName}</Link>{' '}
             <span>en</span>{' '}

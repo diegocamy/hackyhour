@@ -21,8 +21,13 @@ const PreviewContainer = styled.div`
   }
 `;
 
-const PostPreview = ({ post }) => {
-  return <PreviewContainer>{HtmlParser(post)}</PreviewContainer>;
+const PostPreview = ({ post, featuredImg }) => {
+  return (
+    <PreviewContainer>
+      <img alt="featured post img" src={featuredImg} />
+      {HtmlParser(post)}
+    </PreviewContainer>
+  );
 };
 
 export default PostPreview;

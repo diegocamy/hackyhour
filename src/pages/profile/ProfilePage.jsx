@@ -40,8 +40,9 @@ const ProfilePage = ({ match }) => {
           authorAvatar={user.picture}
           name={user.name}
           bio={user.bio}
+          authorId={user._id}
         />
-        {posts.map((p) => {
+        {posts.map(p => {
           return (
             <BigCard
               key={p.id}
@@ -53,6 +54,9 @@ const ProfilePage = ({ match }) => {
               description={p.description}
               likes={p.likes}
               updatedAt={p.updatedAt}
+              authorId={user._id}
+              category={p.category}
+              postSlug={p.slug}
             />
           );
         })}

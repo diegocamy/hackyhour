@@ -73,6 +73,13 @@ const PostPage = ({ history, match }) => {
     getPost();
   }, [match.params.id, history]);
 
+  useEffect(() => {
+    if (post) {
+      //TODO LOAD RELATED POSTS
+      console.log('post loaded BROOOO');
+    }
+  }, [post]);
+
   const likePost = async () => {
     try {
       if (!user) return;
@@ -105,7 +112,7 @@ const PostPage = ({ history, match }) => {
     return (
       <PostPageWrapper user={user}>
         <h1>{post.title}</h1>
-        <PostPreview post={post.post} />
+        <PostPreview post={post.post} featuredImg={post.featuredImage} />
         {/* CHECK IF USER ALREADY LIKED POST */}
         {user && post.likes[user._id] ? (
           // IF ALREADY LIKED SHOW A RED HEART
@@ -122,6 +129,7 @@ const PostPage = ({ history, match }) => {
         )}
 
         <AuthorCard
+          authorId={post.author._id}
           authorAvatar={post.author.picture}
           name={post.author.name}
           bio={post.author.bio}

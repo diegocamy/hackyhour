@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Button from '../button/Button';
 
 const AuthorCardWrapper = styled.div`
@@ -25,6 +25,12 @@ const AuthorCardWrapper = styled.div`
     position: absolute;
     right: 5px;
     top: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
   }
 
   @media only screen and (max-width: 700px) {
@@ -54,7 +60,15 @@ const AuthorSocialMedia = styled.div`
   }
 `;
 
-const AuthorCard = ({ authorAvatar, name, bio, shadow, editable, history }) => {
+const AuthorCard = ({
+  authorAvatar,
+  name,
+  bio,
+  shadow,
+  editable,
+  history,
+  authorId,
+}) => {
   return (
     <AuthorCardWrapper shadow={shadow}>
       {editable && (
@@ -64,8 +78,10 @@ const AuthorCard = ({ authorAvatar, name, bio, shadow, editable, history }) => {
           <i className="fas fa-edit"></i>
         </Button>
       )}
-      <AuthorAvatar src={authorAvatar} alt="Author-avatar" />
-      <h3>{name}</h3>
+      <Link to={`/profile/${authorId}`}>
+        <AuthorAvatar src={authorAvatar} alt="Author-avatar" />
+        <h3>{name}</h3>
+      </Link>
       <p>{bio}</p>
       <AuthorSocialMedia>
         <i className="fab fa-facebook-square"></i>

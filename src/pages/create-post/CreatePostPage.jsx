@@ -112,7 +112,15 @@ const CreatePostPage = ({ history }) => {
       <div className="buttons">
         <Button
           onClick={async () => {
+            //check if any of the required fields are empty
+            if (!title) return alert('Ingrese un titulo');
+            if (!category) return alert('Elija una categoria');
+            if (!description) return alert('Ingrese una descripcion');
+            if (!featuredImg) return alert('Agregue una imagen destacada');
+            if (!post) return alert('El post no debe estar vacío');
+
             setPosting(true);
+
             const {
               data: { post: newPost },
             } = await axios.post('/api/posts', {
