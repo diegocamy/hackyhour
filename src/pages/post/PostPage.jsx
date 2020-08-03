@@ -51,6 +51,7 @@ const PostPageWrapper = styled.div`
 const PostPage = ({ history, match }) => {
   const { user } = useContext(UserContext);
   const [post, setPost] = useState(null);
+  const [relatedPosts, setRelatedPosts] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -75,8 +76,22 @@ const PostPage = ({ history, match }) => {
 
   useEffect(() => {
     if (post) {
-      //TODO LOAD RELATED POSTS
-      console.log('post loaded BROOOO');
+      const getRelatedPosts = async () => {
+        try {
+          const data = { id: post._id };
+          const { data: relPosts } = await axios.post(
+            `/api/posts/related/${post.category}`,
+            {
+              ...data,
+            }
+          );
+          setRelatedPosts(relPosts);
+        } catch (error) {
+          console.log('Error related posts');
+        }
+      };
+
+      getRelatedPosts();
     }
   }, [post]);
 
@@ -127,32 +142,33 @@ const PostPage = ({ history, match }) => {
             <i className="fas fa-heart"></i>
           </div>
         )}
-
         <AuthorCard
           authorId={post.author._id}
           authorAvatar={post.author.picture}
           name={post.author.name}
           bio={post.author.bio}
         />
-        <h2 className="relacionados">Posts Relacionados</h2>
-        <BigCard
-          authorName="Diego Camy"
-          postCategory="Programacion"
-          authorPhoto="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-          postImg="https://cdn-images-1.medium.com/fit/t/800/240/1*uceu9f-p_A2H2-2xD-6MiQ.jpeg"
-        />
-        <BigCard
-          authorName="Diego Camy"
-          postCategory="Programacion"
-          authorPhoto="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-          postImg="https://cdn-images-1.medium.com/fit/t/800/240/1*uceu9f-p_A2H2-2xD-6MiQ.jpeg"
-        />
-        <BigCard
-          authorName="Diego Camy"
-          postCategory="Programacion"
-          authorPhoto="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-          postImg="https://cdn-images-1.medium.com/fit/t/800/240/1*uceu9f-p_A2H2-2xD-6MiQ.jpeg"
-        />
+        {relatedPosts.length > 0 && (
+          <h2 className="relacionados">Posts Relacionados</h2>
+        )}
+        {relatedPosts.map(rp => {
+          return (
+            <BigCard
+              key={rp._id}
+              authorName={rp.author_info[0].name}
+              postCategory={rp.category}
+              authorPhoto={rp.author_info[0].picture}
+              postImg={rp.featuredImage}
+              title={rp.title}
+              description={rp.description}
+              likes={rp.likes}
+              updatedAt={rp.updatedAt}
+              authorId={rp.author_info[0]._id}
+              category={rp.category}
+              postSlug={rp.slug}
+            />
+          );
+        })}
       </PostPageWrapper>
     );
 };

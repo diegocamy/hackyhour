@@ -14,6 +14,7 @@ import { UserContext } from './context/userContext';
 import axios from './axios/axios';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import EditProfilePage from './pages/edit-profile/EditProfilePage';
+import ScrollToTop from './components/scroll-to-top/ScrollToTop';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -68,6 +69,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <ThemeProvider theme={theme}>
+          <ScrollToTop />
           <GlobalStyle />
           <Navbar />
           <Switch>
