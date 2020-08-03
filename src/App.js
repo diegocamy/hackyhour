@@ -15,6 +15,7 @@ import axios from './axios/axios';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import EditProfilePage from './pages/edit-profile/EditProfilePage';
 import ScrollToTop from './components/scroll-to-top/ScrollToTop';
+import Footer from './components/footer/Footer';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -84,6 +85,7 @@ function App() {
             <Route path="/post/:id" component={PostPage} />
             <Route component={NotFoundPage} />
           </Switch>
+          <Footer />
         </ThemeProvider>
       </Router>
     </UserContext.Provider>

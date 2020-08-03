@@ -45,7 +45,7 @@ const ProfilePage = ({ match }) => {
         {posts.map(p => {
           return (
             <BigCard
-              key={p.id}
+              key={p._id}
               authorName={user.name}
               postCategory={p.category}
               authorPhoto={user.picture}

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../context/userContext';
+import axios from '../../axios/axios';
 import InputField from '../../components/input-field/InputField';
 import Button from '../../components/button/Button';
 
@@ -39,8 +40,8 @@ const StyledTextArea = styled.textarea`
   resize: vertical;
 `;
 
-const EditProfilePage = () => {
-  const { user } = useContext(UserContext);
+const EditProfilePage = props => {
+  const { user, setUser } = useContext(UserContext);
 
   const [userBio, setUserBio] = useState('');
   const [fb, setFb] = useState('');
@@ -63,6 +64,31 @@ const EditProfilePage = () => {
       setGh(github);
     }
   }, [user]);
+
+  const updateProfile = async () => {
+    try {
+      if (!userBio) {
+        return alert('Debe escribir algo en su bio');
+      }
+
+      const userData = {
+        bio: userBio,
+        facebook: fb,
+        twitter: tw,
+        instagram: ig,
+        linkedin: lkd,
+        github: gh,
+      };
+
+      const { data: updatedUser } = await axios.post(`/api/users/editProfile`, {
+        ...userData,
+      });
+      setUser(updatedUser);
+      props.history.push(`/dashboard`);
+    } catch (error) {
+      console.log('object');
+    }
+  };
 
   return (
     <EditProfileContainer>
@@ -111,7 +137,7 @@ const EditProfilePage = () => {
         />
       </form>
       <br />
-      <Button>Guardar</Button>
+      <Button onClick={updateProfile}>Guardar</Button>
     </EditProfileContainer>
   );
 };
