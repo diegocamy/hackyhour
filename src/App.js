@@ -16,6 +16,7 @@ import DashboardPage from './pages/dashboard/DashboardPage';
 import EditProfilePage from './pages/edit-profile/EditProfilePage';
 import ScrollToTop from './components/scroll-to-top/ScrollToTop';
 import Footer from './components/footer/Footer';
+import PrivateRoute from './components/private-route/PrivateRoute';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -76,11 +77,11 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/category/:categoryId" component={CategoryPage} />
-            <Route path="/dashboard" component={DashboardPage} />
-            <Route path="/edit-profile" component={EditProfilePage} />
+            <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <PrivateRoute path="/edit-profile" component={EditProfilePage} />
             <Route path="/search" component={SearchPage} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/create" component={CreatePostPage} />
+            <PrivateRoute path="/create" component={CreatePostPage} />
             <Route path="/profile/:id" component={ProfilePage} />
             <Route path="/post/:id" component={PostPage} />
             <Route component={NotFoundPage} />
