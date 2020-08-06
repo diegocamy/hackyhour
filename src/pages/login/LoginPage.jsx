@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LoginContainer = styled.div`
@@ -67,20 +69,26 @@ const githubSignIn = async () => {
   window.open('http://localhost:5000/api/auth/signinwithgithub', '_self');
 };
 
-const LoginPage = () => {
-  return (
-    <LoginContainer>
-      <h2>Iniciar Sesión</h2>
-      <hr />
-      <button className="google" onClick={googleSignIn}>
-        <i className="fab fa-google"></i>Iniciar Sesión con Google
-      </button>
-      <button className="github" onClick={githubSignIn}>
-        <i className="fab fa-github"></i>Iniciar Sesión con GitHub
-      </button>
-      <span></span>
-    </LoginContainer>
-  );
+const LoginPage = ({ history }) => {
+  const { user } = useContext(UserContext);
+
+  if (user && user._id) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <LoginContainer>
+        <h2>Iniciar Sesión</h2>
+        <hr />
+        <button className="google" onClick={googleSignIn}>
+          <i className="fab fa-google"></i>Iniciar Sesión con Google
+        </button>
+        <button className="github" onClick={githubSignIn}>
+          <i className="fab fa-github"></i>Iniciar Sesión con GitHub
+        </button>
+        <span></span>
+      </LoginContainer>
+    );
+  }
 };
 
 export default LoginPage;

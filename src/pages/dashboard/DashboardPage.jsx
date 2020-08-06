@@ -23,6 +23,7 @@ const DashboardPage = ({ history }) => {
       <AuthorCard
         editable
         authorAvatar={user.picture || ''}
+        authorId={user._id}
         name={user.name}
         shadow
         bio={user.bio}

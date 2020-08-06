@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 import styled from 'styled-components';
 import axios from '../../axios/axios';
 
@@ -10,7 +11,8 @@ const ProfileContainer = styled.div`
   max-width: 700px;
 `;
 
-const ProfilePage = ({ match }) => {
+const ProfilePage = ({ match, history }) => {
+  const { user: loggedUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
 
@@ -30,6 +32,12 @@ const ProfilePage = ({ match }) => {
     };
     fetchUserData();
   }, [match]);
+
+  useEffect(() => {
+    if (user && user._id.toString() === loggedUser._id.toString()) {
+      history.push('/dashboard');
+    }
+  }, [user, history, loggedUser._id]);
 
   if (!user) return <h2>Loading!</h2>;
 
