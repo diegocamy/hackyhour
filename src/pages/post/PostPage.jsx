@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import PostPreview from '../../components/post-preview/PostPreview';
 import AuthorCard from '../../components/author-card/AuthorCard';
 import BigCard from '../../components/big-card/BigCard';
+import Button from '../../components/button/Button';
 
 const PostPageWrapper = styled.div`
   max-width: 700px;
@@ -36,6 +37,17 @@ const PostPageWrapper = styled.div`
     }
   }
 
+  .buttons {
+    margin-top: -20px;
+    background: white;
+    text-align: center;
+    padding-bottom: 20px;
+
+    button {
+      margin: 5px;
+    }
+  }
+
   .relacionados {
     text-align: center;
     margin-bottom: 15px;
@@ -60,7 +72,7 @@ const PostPage = ({ history, match }) => {
         setError(null);
         const {
           data: { post, author },
-        } = await axios.get(`/api/posts/${match.params.id}`);
+        } = await axios.get(`/api/posts/${match.params.slug}`);
         if (post && author) {
           setPost({ ...post, author });
         }
@@ -72,7 +84,7 @@ const PostPage = ({ history, match }) => {
     };
 
     getPost();
-  }, [match.params.id, history]);
+  }, [match.params.slug, history]);
 
   useEffect(() => {
     if (post) {
@@ -119,6 +131,17 @@ const PostPage = ({ history, match }) => {
     }
   };
 
+  const handleEdit = () => {
+    history.push(`/edit-post/${post.slug}`);
+  };
+
+  const handleDelete = async e => {
+    if (window.confirm('Esta seguro?')) {
+      await axios.delete(`/api/posts/${post._id}`);
+      history.push('/');
+    }
+  };
+
   if (!post) return <h2>cargando...</h2>;
 
   if (!post && error) return <h2>{error}</h2>;
@@ -142,6 +165,14 @@ const PostPage = ({ history, match }) => {
             <i className="fas fa-heart"></i>
           </div>
         )}
+        {/*CHECK IF USER IS AUTHOR OF THE POST TO SHOW EDIT AND DELETE BUTTONS */}
+        {user && user._id.toString() === post.author._id.toString() ? (
+          <div className="buttons">
+            <Button onClick={handleEdit}>Editar</Button>
+            <Button onClick={handleDelete}>Eliminar</Button>
+          </div>
+        ) : null}
+
         <AuthorCard
           authorId={post.author._id}
           authorAvatar={post.author.picture}

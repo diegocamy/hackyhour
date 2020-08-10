@@ -22,7 +22,8 @@ const CreatePostWrapper = styled.div`
   }
 `;
 
-const CreatePostPage = ({ history }) => {
+const CreatePostPage = ({ history, match }) => {
+  const [fetchedPost, setFetchedPost] = useState(null);
   const [posting, setPosting] = useState(false);
   const [post, setPost] = useState('');
   const [title, setTitle] = useState('');
@@ -32,6 +33,10 @@ const CreatePostPage = ({ history }) => {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
+    if (match.params.slug) {
+      return;
+    }
+
     const savedPost = JSON.parse(localStorage.getItem('blogpost'));
 
     if (savedPost && savedPost.title) {
@@ -52,9 +57,13 @@ const CreatePostPage = ({ history }) => {
     if (savedPost && savedPost.category) {
       setCategory(savedPost.category);
     }
-  }, []);
+  }, [match.params.slug]);
 
   useEffect(() => {
+    if (match.params.slug) {
+      return;
+    }
+
     const postObject = {
       title,
       description,
@@ -64,12 +73,43 @@ const CreatePostPage = ({ history }) => {
       category,
     };
     localStorage.setItem('blogpost', JSON.stringify(postObject));
-  }, [post, title, description, slug, featuredImg, category]);
+  }, [
+    post,
+    title,
+    description,
+    slug,
+    featuredImg,
+    category,
+    match.params.slug,
+  ]);
 
   useEffect(() => {
     const postSlug = title.toLowerCase().split(' ').join('-');
     setSlug(postSlug);
   }, [title]);
+
+  useEffect(() => {
+    if (match.params.slug) {
+      //fetch post data
+      const fetchPost = async () => {
+        try {
+          const {
+            data: { post },
+          } = await axios.get(`/api/posts/${match.params.slug}`);
+          setFetchedPost(post);
+          setPost(post.post);
+          setTitle(post.title);
+          setFeaturedImg(post.featuredImage);
+          setDescription(post.description);
+          setCategory(post.category);
+        } catch (error) {
+          console.log('error error');
+        }
+      };
+
+      fetchPost();
+    }
+  }, [match.params.slug]);
 
   return (
     <CreatePostWrapper>
@@ -121,21 +161,48 @@ const CreatePostPage = ({ history }) => {
 
             setPosting(true);
 
-            const {
-              data: { post: newPost },
-            } = await axios.post('/api/posts', {
-              title,
-              category,
-              slug,
-              description,
-              featuredImage: featuredImg,
-              post,
-            });
-            localStorage.removeItem('blogpost');
-            setPosting(false);
-            history.push(`/post/${newPost.slug}`);
+            try {
+              if (!match.params.slug) {
+                //CREATE POST
+                const {
+                  data: { post: newPost },
+                } = await axios.post('/api/posts', {
+                  title,
+                  category,
+                  slug,
+                  description,
+                  featuredImage: featuredImg,
+                  post,
+                });
+                setPosting(false);
+                localStorage.removeItem('blogpost');
+                history.push(`/post/${newPost.slug}`);
+              } else {
+                //UPDATE POST
+                const {
+                  data: { post: newPost },
+                } = await axios.post(
+                  `/api/posts/edit-post/${fetchedPost.slug}`,
+                  {
+                    title,
+                    category,
+                    slug,
+                    description,
+                    featuredImage: featuredImg,
+                    post,
+                  }
+                );
+                history.push(`/post/${newPost.slug}`);
+              }
+            } catch (error) {
+              console.log('error error error todo later');
+            }
           }}>
-          {posting ? 'Publicando' : 'Publicar'}
+          {match.params.slug
+            ? 'Actualizar'
+            : posting
+            ? 'Publicando'
+            : 'Publicar'}
         </Button>
       </div>
     </CreatePostWrapper>

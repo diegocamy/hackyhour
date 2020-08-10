@@ -83,7 +83,8 @@ function App() {
             <Route path="/login" component={LoginPage} />
             <PrivateRoute path="/create" component={CreatePostPage} />
             <Route path="/profile/:id" component={ProfilePage} />
-            <Route path="/post/:id" component={PostPage} />
+            <Route path="/post/:slug" component={PostPage} />
+            <Route path="/edit-post/:slug" component={CreatePostPage} />
             <Route component={NotFoundPage} />
           </Switch>
           <Footer />
