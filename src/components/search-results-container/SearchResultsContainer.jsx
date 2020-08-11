@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SearchContainer = styled.div`
-  margin: auto;
-  margin-top: 25px;
-  height: 200px;
+  margin: 25px auto;
+  height: fit-content;
 
   @media only screen and (min-width: 375px) {
     width: 80%;

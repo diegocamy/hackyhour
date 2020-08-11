@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from '../../axios/axios';
 
 import SearchForm from '../../components/search-form/SearchForm';
 import SearchResultsContainer from '../../components/search-results-container/SearchResultsContainer';
@@ -7,15 +8,27 @@ import BigCard from '../../components/big-card/BigCard';
 
 const SearchContainer = styled.div`
   max-width: 900px;
+  min-height: 500px;
   margin: auto;
+  margin-bottom: 25px;
 `;
 
 const SearchPage = props => {
+  const [foundPosts, setFoundPosts] = useState([]);
+
   useEffect(() => {
     const params = new URLSearchParams(props.location.search);
     const searchTerm = params.get('term');
+    const findPosts = async term => {
+      try {
+        const { data: posts } = await axios.get(`/api/posts/search/${term}`);
+        setFoundPosts(posts);
+      } catch (error) {
+        console.log('error todo later');
+      }
+    };
     if (searchTerm) {
-      console.log(searchTerm);
+      findPosts(searchTerm);
     } else {
       props.history.push('/');
     }
@@ -25,18 +38,28 @@ const SearchPage = props => {
     <SearchContainer>
       <SearchForm />
       <SearchResultsContainer>
-        <BigCard
-          authorName="Diego Camy"
-          postCategory="Programacion"
-          authorPhoto="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-          postImg="https://cdn-images-1.medium.com/fit/t/800/240/1*uceu9f-p_A2H2-2xD-6MiQ.jpeg"
-        />
-        <BigCard
-          authorName="Diego Camy"
-          postCategory="Programacion"
-          authorPhoto="https://avatarfiles.alphacoders.com/118/thumb-118867.jpg"
-          postImg="https://cdn-images-1.medium.com/fit/t/800/240/1*uceu9f-p_A2H2-2xD-6MiQ.jpeg"
-        />
+        {foundPosts.length === 0 ? (
+          <h2>No se encontraron posts</h2>
+        ) : (
+          foundPosts.map(p => {
+            return (
+              <BigCard
+                key={p._id}
+                authorName={p.author_info[0].name}
+                postCategory={p.category}
+                authorPhoto={p.author_info[0].picture}
+                postImg={p.featuredImage}
+                title={p.title}
+                description={p.description}
+                likes={p.likes}
+                updatedAt={p.updatedAt}
+                authorId={p.author_info[0]._id}
+                category={p.category}
+                postSlug={p.slug}
+              />
+            );
+          })
+        )}
       </SearchResultsContainer>
     </SearchContainer>
   );

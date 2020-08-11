@@ -29,6 +29,9 @@ const getCampusPosts = posts =>
 const getAnnouncementsPosts = posts =>
   posts.filter(p => p.category === 'anuncios').slice(0, 4);
 
+const getHackyhourPosts = posts =>
+  posts.filter(p => p.category === 'hackyhour').slice(0, 4);
+
 /////////
 
 const Home = () => {
@@ -39,6 +42,7 @@ const Home = () => {
   const [news, setNews] = useState([]);
   const [campus, setCampus] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const [hackyhour, setHackyhour] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -62,6 +66,7 @@ const Home = () => {
       setProgramming(getProgrammingPosts(posts));
       setAnnouncements(getAnnouncementsPosts(posts));
       setCampus(getCampusPosts(posts));
+      setHackyhour(getHackyhourPosts(posts));
     }
   }, [posts]);
 
@@ -76,6 +81,7 @@ const Home = () => {
       <CategoryContainer name="Recientes" posts={recent} />
       <CategoryContainer name="Programacion" posts={programming} />
       <CategoryContainer name="Noticias" posts={news} />
+      <CategoryContainer name="Hacky Hour" posts={hackyhour} />
       <CategoryContainer name="Anuncios" posts={announcements} />
       <CategoryContainer name="Campus" posts={campus} />
     </div>
